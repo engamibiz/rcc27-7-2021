@@ -11,33 +11,31 @@ if($do == 'select'){
     // select page ?>
   <div class="container mt-5 pt-5">
       <h1>All Users</h1>
+      <a href="users.php?do=add" class="btn btn-info text-white">ADD</a>
       <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Email </th>
+            <th scope="col">Registration Date</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
+        <?php foreach($users as $user){ ?>
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row"><?php echo $user['id'] ?></th>
+            <td><?php echo $user['userName'] ?></td>
+            <td><?php echo $user['email'] ?></td>
+            <td><?php echo $user['regDate'] ?></td>
+            <td>
+    <a href="users.php?do=single&id=<?php echo $user['id'] ?>" class="btn btn-info">View</a>
+    <a href="users.php?do=edit&id=<?php echo $user['id'] ?>" class="btn btn-warning">Edit</a>
+    <a href="users.php?do=delete&id=<?php echo $user['id'] ?>" class="btn btn-danger">Delete</a>
+            </td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-        </tr>
+        <?php } ?>
         </tbody>
     </table>
   </div>
@@ -45,7 +43,20 @@ if($do == 'select'){
 <?php
 }elseif ($do == 'single'){
     // single page
-    echo 'Single Page';
+    if(isset($_GET['id'])){
+    $id=$_GET['id'];
+    $user=$userObject->find($id);
+    ?>
+    <div class="container pt-5 mt-5 text-center">
+        <h1><?php echo $user['userName']  ?></h1>
+        <h2><?php echo $user['email']  ?></h2>
+        <h3><?php echo $user['regDate']  ?></h3>
+    </div>
+
+    <?php
+    }else{ // no id in url
+        header("Location:users.php");
+    }
 }elseif ($do == 'add'){
     // add page
     echo 'Add Page';
