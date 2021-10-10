@@ -59,10 +59,69 @@ if($do == 'select'){
     }
 }elseif ($do == 'add'){
     // add page
-    echo 'Add Page';
+  ?>
+        <div class="container mt-5 pt-5">
+            <form method="post" action="users.php?do=insert" class="row g-3 needs-validation" novalidate>
+        <div class="col-md-4">
+            <label for="validationCustom01" class="form-label">User Name</label>
+            <input type="text" class="form-control" name="userName" id="validationCustom01"  required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please choose a username.
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom02" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="validationCustom02"  required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please choose a Email.
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustomUsername" class="form-label">Password</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" name="password" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please choose a password.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+    </form>
+        </div>
+<?php
 }elseif ($do == 'insert'){
     // insert page
-    echo 'Insert Page';
+    $userName=$_POST['userName'];
+    $email=$_POST['email'];
+    $password=$_POST['password'];
+    $passHash=password_hash($password,PASSWORD_BCRYPT);
+    if(empty($userName)){
+        $errors[]='user name can not be empty';
+    }
+    if(empty($email)){
+        $errors[]='email can not be empty';
+    }
+    if(empty($password)){
+        $errors[]='password can not be empty';
+    }
+    if(isset($errors)){
+        // there are errors
+    }else{
+        // no errors
+    }
+
 }elseif ($do == 'edit'){
     // edit page
     echo 'Edit Page';

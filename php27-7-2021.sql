@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2021 at 07:20 PM
+-- Generation Time: Oct 05, 2021 at 07:49 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `php27-7-2021`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'web design'),
+(2, 'web development'),
+(3, 'emarketing');
 
 -- --------------------------------------------------------
 
@@ -43,12 +63,18 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `userName`, `email`, `password`, `regDate`, `userState`, `userGroup`) VALUES
 (1, 'ahmed', 'ahmed@gmail.com', '123456', '2021-09-23 20:01:30', 'inactive', 'user'),
-(4, 'ahmed1', 'ahmed1@gmail.com', '123456', '2021-09-23 20:03:12', 'inactive', 'user'),
+(4, 'mohsen', 'mohsen@gmail.com', '123456', '2021-09-23 20:03:12', 'inactive', 'user'),
 (5, 'mohamed', 'mohamed@gmail.com', '132456', '2021-09-23 20:04:01', 'inactive', 'user');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -63,10 +89,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
