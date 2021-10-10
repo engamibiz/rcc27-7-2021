@@ -116,11 +116,28 @@ if($do == 'select'){
     if(empty($password)){
         $errors[]='password can not be empty';
     }
+    $count=$userObject->unique("userName='$userName'");
+    if($count > 0){
+        $errors[]='user name is already registred';
+    }
+    $count=$userObject->unique("email='$email'");
+    if($count > 0){
+        $errors[]='email is already registred';
+    }
+    echo '<div class="container mt-5 pt-5">';
     if(isset($errors)){
         // there are errors
+
+        foreach ($errors as $error){
+            echo '<div class="alert alert-danger">'. $error . '</div>';
+        }
+
     }else{
-        // no errors
+        $userObject->insert("userName='$userName',email='$email',password='$passHash'");
+        echo '<div class="alert alert-success">Added Successfully</div>';
     }
+    echo '</div>';
+    header("Refresh:5;url=users.php");
 
 }elseif ($do == 'edit'){
     // edit page
@@ -130,10 +147,18 @@ if($do == 'select'){
     echo 'Update Page';
 }elseif ($do == 'delete'){
     // delete page
-    echo 'Delete Page';
+   if(isset($_GET['id'])){
+       $id=$_GET['id'];
+       $userObject->delete($id);
+       header("Location:users.php");
+   }else{
+       header("Location:users.php");
+   }
 }else{
     // non page
     echo 'you are not authorized';
+    header("Location:users.php");
+
 }
 
 include 'footer.php';
